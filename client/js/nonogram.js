@@ -1,5 +1,25 @@
-function Nonogram(grid) {
+//Cell Object (einai ta kelia tou nonogram)
+function Cell(w, h, x, y, value) {
+	this.w = w;
+	this.h = h;
+	this.x = x;
+	this.y = y;
+	this.value = value;
+}
 
+//------------------------------------------------------------------------------------
+//Cell object for the numbers
+function NumberCell(w, h, x, y, number) {
+	this.w = w;
+	this.h = h;
+	this.x = x;
+	this.y = y;
+	// this.value = value; 8a to energopoihsoume otan kanoume thn ulopoihsh gia thn akurwsh twn keliwn
+	this.number = number;
+}
+
+function Nonogram(grid) {
+	this.correctGrid = grid;
 	let windowWidth = window.innerWidth; // to width tou para8urou
 	let windowHeight = window.innerHeight; // to upsos tou para8urou
 	let size; //auto ousiastika einai to mege8os tou canvas
@@ -9,9 +29,6 @@ function Nonogram(grid) {
 	}else{
 		size = windowWidth;
 	}
-
-	// this.rowNumbersGrid = [];
-	// this.columnNumbersGrid = [];
 	
 	this.rowNumbers = [];
 
@@ -26,20 +43,20 @@ function Nonogram(grid) {
 	}
 
 	//gia ka8e grammh tou grid
-	for(let i = 0; i < this.correctGrid.length; i++) { // this.correctGrid.length = 5 
+	for(let row = 0; row < this.correctGrid.length; row++) { // this.correctGrid.length = 5 
 		let counter = 0; // counter pou metraei posoi 1 einai sunexomenoi
 		let depth = 0; // metraei to ba8os tou pinaka
 
 		//gia ka8e sthlh ths grammhs
-		for(let y = 0; y < this.correctGrid[i].length; y++) { //correctGrid[i].length einai h ka8e sthlh
+		for(let column = 0; column < this.correctGrid[row].length; column++) { //correctGrid[i].length einai h ka8e sthlh
 			// ama einai assos sthn sthlh
-			if(this.correctGrid[i][y] == 1) {
+			if(this.correctGrid[row][column] == 1) {
 				counter += 1; //auksanetai kata 1
-				this.rowNumbers[i][depth] = counter; //to depth ginetai oso einai to counter
+				this.rowNumbers[row][depth] = counter; //to depth ginetai oso einai to counter
 			}else{
 				//ama eixame brei kapoion 1
 				if(counter != 0) {
-					this.rowNumbers[i][depth] = counter; //sthn grammh kai sto ba8os pou eimaste bazoume ton ari8mo
+					this.rowNumbers[row][depth] = counter; //sthn grammh kai sto ba8os pou eimaste bazoume ton ari8mo
 					counter = 0; //mhdenizoume ton counter
 					depth++; // kai to ba8os megalwnei
 				}
@@ -89,8 +106,6 @@ function Nonogram(grid) {
 		}
 	}
 
-	
-
 	let maxSize;
 
 	if(this.maxRowNumberSize > this.maxColumnNumberSize) {
@@ -102,20 +117,23 @@ function Nonogram(grid) {
 	this.blockSize = 0; // Mege8os tou block/cell
 	this.blockSize = Math.floor((size / maxSize) - 1); // το -1 θα το εξηγησω στην συνέχεια οταν γίνει το drawgrid
 
-
-
 	//to width kai to height 8a bgainei apo to mege8os tou para8urou
 	this.width = 0; //to platos tou canvas
 	this.height = 0; //to upsos tou canvas
 
+	//----- Edw to afhsa
+
 	this.width = (this.correctGrid[0].length + this.maxRowNumberSize) * this.blockSize;
 	this.height = (this.correctGrid.length + this.maxColumnNumberSize) * this.blockSize;
+
+	this.rowNumbersGrid = [];
+	this.columnNumbersGrid = [];
+
 
 	
 
 
 	//--------------------------------------------------------------------------------------------------------	
-	// this.correctGrid = grid; // gt to exw balei auto?
 	// this.emptyGrid = []; // Adeio nonogram , tou xrhsth
 	// this.userChoices = [];// einai gia to store
 	// this.fillCellChoice = "default"; //Auto 8a xrhsimepsei gia ta tools
