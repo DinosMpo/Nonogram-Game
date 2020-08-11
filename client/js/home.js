@@ -8,14 +8,12 @@ let nonogram = new Nonogram([[1,0,1,0,1],[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[1,
 canvas.width = nonogram.width;
 canvas.height = nonogram.height;
 
-console.log("rowNumbers");
-console.log(nonogram.rowNumbers);
-console.log("columnNumbers");
-console.log(nonogram.columnNumbers);
-console.log("blockSize = " + nonogram.blockSize);
-console.log("width = " + nonogram.width);
-console.log("height = " + nonogram.height);
+console.log("rowNumbers: " + nonogram.rowNumbers);
+console.log("columnNumbers: " + nonogram.columnNumbers);
+console.log("blockSize: " + nonogram.blockSize);
+console.log("width: " + nonogram.width);
+console.log("height: " + nonogram.height);
 
 nonogram.drawGrid();
-nonogram.fillRowNumbers();
-nonogram.fillColumnNumbers();
+nonogram.drawRowNumbers();
+nonogram.drawColumnNumbers();
