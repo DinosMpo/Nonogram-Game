@@ -14,7 +14,7 @@ function NumberCell(w, h, x, y, value, number) {
 	this.h = h;
 	this.x = x;
 	this.y = y;
-	this.value = value; //8a to energopoihsoume otan kanoume thn ulopoihsh gia thn akurwsh twn keliwn
+	this.value = value;
 	this.number = number;
 }
 
@@ -159,13 +159,13 @@ function Nonogram(levelGrid) {
 		}
 	}
 
-
+	this.fillCellChoice = "default"; //Auto 8a xrhsimepsei gia ta tools
 	
 
 
 	//--------------------------------------------------------------------------------------------------------	
 	// this.userChoices = [];// einai gia to store
-	// this.fillCellChoice = "default"; //Auto 8a xrhsimepsei gia ta tools
+	
 	// this.currentChoice = {};
 	// this.previousChoice = {
 	// 	active: false
