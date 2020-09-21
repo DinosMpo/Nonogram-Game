@@ -77,6 +77,7 @@ Nonogram.prototype.drawXCell = function(cell) {
 
 //Gemisma twn keliwn
 Nonogram.prototype.fillCels = function(mouseX, mouseY) {
+	// let chosenCell = NaN;
 	ctx.lineWidth = 3;
 	ctx.beginPath();
 	for(var i=0; i<this.rowNumbersGrid.length; i++) {
@@ -118,22 +119,79 @@ Nonogram.prototype.fillCels = function(mouseX, mouseY) {
 	ctx.stroke();
 	ctx.closePath();
 	
-	for(var i=0;i<this.emptyGrid.length;i++) {
-		if(mouseX >= this.emptyGrid[i].x && 
-			mouseY >= this.emptyGrid[i].y && 
-			mouseX <= (this.emptyGrid[i].x + this.blockSize) && 
-			mouseY <= (this.emptyGrid[i].y + this.blockSize)) {
-			if(this.emptyGrid[i].value == 0) {
-				this.emptyGrid[i].value = 1;
-				this.drawWhiteCell(this.emptyGrid[i]);
-				this.drawBlackCell(this.emptyGrid[i]);
-	    	}else if(this.emptyGrid[i].value == 1) { //fill the cell with a X
+	//refactor stadio
+	// for(let i=0;i<this.emptyGrid.length;i++) {
+	// 	if(mouseX >= this.emptyGrid[i].x && mouseY >= this.emptyGrid[i].y && mouseX <= (this.emptyGrid[i].x + this.blockSize) && mouseY <= (this.emptyGrid[i].y + this.blockSize)) {
+	// 		chosenCell = i;
+	// 	}
+	// }
+
+	if(this.fillCellChoice == "default") {
+		for(var i=0;i<this.emptyGrid.length;i++) {
+			if(mouseX >= this.emptyGrid[i].x && mouseY >= this.emptyGrid[i].y && mouseX <= (this.emptyGrid[i].x + this.blockSize) && mouseY <= (this.emptyGrid[i].y + this.blockSize)) {
+				if(this.emptyGrid[i].value == 0) { //fill the cell black
+					this.emptyGrid[i].value = 1;
+					this.drawWhiteCell(this.emptyGrid[i]);
+					this.drawBlackCell(this.emptyGrid[i]);
+					// this.drawPreview(this.emptyGrid[i]);
+					// this.strokeCurrentChoice(this.emptyGrid[i]);
+		    	}else if(this.emptyGrid[i].value == 1) { //fill the cell with a X
 			    	this.emptyGrid[i].value = 2;
 			    	this.drawWhiteCell(this.emptyGrid[i]);
 					this.drawXCell(this.emptyGrid[i]);
-			}else {
-				this.emptyGrid[i].value = 0;
-				this.drawWhiteCell(this.emptyGrid[i]);
+					// this.drawPreview(this.emptyGrid[i]);
+					// this.strokeCurrentChoice(this.emptyGrid[i]);
+				}else { //Clear the cell
+					this.emptyGrid[i].value = 0;
+					this.drawWhiteCell(this.emptyGrid[i]);
+					// this.drawPreview(this.emptyGrid[i]);
+					// this.strokeCurrentChoice(this.emptyGrid[i]);
+				}
+			}
+		}
+	}else if(this.fillCellChoice == "black"){
+		for(var i=0;i<this.emptyGrid.length;i++) {
+			if(mouseX >= this.emptyGrid[i].x && mouseY >= this.emptyGrid[i].y && mouseX <= (this.emptyGrid[i].x + this.blockSize) && mouseY <= (this.emptyGrid[i].y + this.blockSize)) {
+				if(this.emptyGrid[i].value !== 1) {
+					this.emptyGrid[i].value = 1;//fil the cell black
+					this.drawWhiteCell(this.emptyGrid[i]);
+					this.drawBlackCell(this.emptyGrid[i]);
+					// this.drawPreview(this.emptyGrid[i]);
+					// this.strokeCurrentChoice(this.emptyGrid[i]);
+			    }else{
+					this.emptyGrid[i].value = 0;
+					this.drawWhiteCell(this.emptyGrid[i]);
+					// this.drawPreview(this.emptyGrid[i]);
+					// this.strokeCurrentChoice(this.emptyGrid[i]);
+				}
+			}
+		}
+	}else if(this.fillCellChoice == "x") {
+		for(var i=0;i<this.emptyGrid.length;i++) {
+			if(mouseX >= this.emptyGrid[i].x && mouseY >= this.emptyGrid[i].y && mouseX <= (this.emptyGrid[i].x + this.blockSize) && mouseY <= (this.emptyGrid[i].y + this.blockSize)) {
+				if(this.emptyGrid[i].value !== 2) {
+					this.emptyGrid[i].value = 2;
+					this.drawWhiteCell(this.emptyGrid[i]);
+					// this.drawPreview(this.emptyGrid[i]);
+					this.drawXCell(this.emptyGrid[i]);
+					// this.strokeCurrentChoice(this.emptyGrid[i]);
+		    	}else{
+		    		this.emptyGrid[i].value = 0;
+					this.drawWhiteCell(this.emptyGrid[i]);
+					// this.drawPreview(this.emptyGrid[i]);
+					// this.strokeCurrentChoice(this.emptyGrid[i]);
+		    	}
+		    }
+		}
+	}else if(this.fillCellChoice == "white") {
+		for(var i=0;i<this.emptyGrid.length;i++) {
+			if(mouseX >= this.emptyGrid[i].x && mouseY >= this.emptyGrid[i].y && mouseX <= (this.emptyGrid[i].x + this.blockSize) && mouseY <= (this.emptyGrid[i].y + this.blockSize)) {
+				if(this.emptyGrid[i].value !== 0) {
+					this.emptyGrid[i].value = 0;
+					this.drawWhiteCell(this.emptyGrid[i]);
+					// this.drawPreview(this.emptyGrid[i]);;
+					// this.strokeCurrentChoice(this.emptyGrid[i]);
+			    }
 			}
 		}
 	}
