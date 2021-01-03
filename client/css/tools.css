@@ -26,6 +26,10 @@
   background: linear-gradient(to bottom right, #e0e0d1, #999966);
 }
 
+.active {
+    background: linear-gradient(to bottom right, red, grey);
+}
+
 .black, .white, .x {
   padding-top: 5px;
   width: 100%;
@@ -41,6 +45,21 @@
   padding: 5px;
   border: 2px solid black;
   border-radius: 25px;
+}
+
+.expand {
+  display: none;
+  position: absolute;
+  bottom: 110%;
+  left: 149px;
+}
+
+.redo:active, .undo:active {
+  background: linear-gradient(to bottom right, red, grey);
+}
+
+.redo_undo:active {
+  background: linear-gradient(to bottom right, grey, grey);
 }
 
 .help {
