@@ -21,7 +21,7 @@ function NumberCell(w, h, x, y, value, number) {
 //------------------------------------------------------------------------------------
 //Nonogram Object
 function Nonogram(levelGrid) {
-	this.correctGrid = levelGrid;
+	this.levelGrid = levelGrid;
 	let windowWidth = window.innerWidth; // to width tou para8urou
 	let windowHeight = window.innerHeight; // to upsos tou para8urou
 	let size; //auto ousiastika einai to mege8os tou canvas
@@ -37,21 +37,21 @@ function Nonogram(levelGrid) {
 	//ousiastika einai oi grammes tou nonogram
 	//kai briskw tous ari8mous pou exei h ka8e grammh
 	this.rowNumbers = [];
-	for(let i=0;i<this.correctGrid.length;i++) { //correctGrid.length = einai h ka8e grammh 0 ; 0 < 5 ; 0++
+	for(let i=0;i<this.levelGrid.length;i++) { //levelGrid.length = einai h ka8e grammh 0 ; 0 < 5 ; 0++
 		//gia ka8e grammh tou grid bazoume enan ftiaxnoume enan pinaka kai tou dinoume thn timh 0
 		this.rowNumbers[i] = []; //enas pinakas gia ka8e grammh
 		this.rowNumbers[i][0] = 0;
 	}
 
 	//gia ka8e grammh tou grid
-	for(let row = 0; row < this.correctGrid.length; row++) { // this.correctGrid.length = 5 
+	for(let row = 0; row < this.levelGrid.length; row++) { // this.levelGrid.length = 5 
 		let counter = 0; // counter pou metraei posoi 1 einai sunexomenoi
 		let depth = 0; // metraei to ba8os tou pinaka
 
 		//gia ka8e sthlh ths grammhs
-		for(let column = 0; column < this.correctGrid[row].length; column++) { //correctGrid[i].length einai h ka8e sthlh
+		for(let column = 0; column < this.levelGrid[row].length; column++) { //levelGrid[i].length einai h ka8e sthlh
 			// ama einai assos sthn sthlh
-			if(this.correctGrid[row][column] == 1) {
+			if(this.levelGrid[row][column] == 1) {
 				counter += 1; //auksanetai kata 1
 				this.rowNumbers[row][depth] = counter; //to depth ginetai oso einai to counter
 			}else{
@@ -67,17 +67,17 @@ function Nonogram(levelGrid) {
 
 	//Apo edw pairnw tous ari8mous gia ka8e sthllh
 	this.columnNumbers = [];
-	for(let i=0;i<this.correctGrid[0].length;i++) {
+	for(let i=0;i<this.levelGrid[0].length;i++) {
 		this.columnNumbers[i] = [];
 		this.columnNumbers[i][0] = 0;
 	}
 
-	for(let column=0;column<this.correctGrid[0].length;column++) {
+	for(let column=0;column<this.levelGrid[0].length;column++) {
 		let counter = 0;
 		let depth = 0;
 
-		for(let row=0;row<this.correctGrid.length;row++) {
-			if(this.correctGrid[row][column]==1) {
+		for(let row=0;row<this.levelGrid.length;row++) {
+			if(this.levelGrid[row][column]==1) {
 				counter += 1;
 				this.columnNumbers[column][depth] = counter;
 			}
@@ -109,9 +109,9 @@ function Nonogram(levelGrid) {
 	let maxSize;
 
 	if(this.maxRowNumberSize > this.maxColumnNumberSize) {
-		maxSize = this.maxRowNumberSize + this.correctGrid.length;
+		maxSize = this.maxRowNumberSize + this.levelGrid.length;
 	}else{
-		maxSize = this.maxColumnNumberSize  + this.correctGrid.length;
+		maxSize = this.maxColumnNumberSize  + this.levelGrid.length;
 	}
 	
 	this.blockSize = 0; // Mege8os tou block/cell
@@ -119,8 +119,8 @@ function Nonogram(levelGrid) {
 	//to width kai to height 8a bgainei apo to mege8os tou para8urou
 	this.width = 0; //to platos tou canvas
 	this.height = 0; //to upsos tou canvas
-	this.width = (this.correctGrid[0].length + this.maxRowNumberSize) * this.blockSize;
-	this.height = (this.correctGrid.length + this.maxColumnNumberSize) * this.blockSize;
+	this.width = (this.levelGrid[0].length + this.maxRowNumberSize) * this.blockSize;
+	this.height = (this.levelGrid.length + this.maxColumnNumberSize) * this.blockSize;
 	this.rowNumbersGrid = [];
 	this.columnNumbersGrid = [];
 	//Create row numbers cels
@@ -148,10 +148,6 @@ function Nonogram(levelGrid) {
 		}
 	}
 
-	
-
-
-
 	this.emptyGrid = []; // Adeio nonogram , tou xrhsth
 	for (let i = (this.maxColumnNumberSize ) * this.blockSize; i < this.height; i += this.blockSize ) { //100 ; 100 < 250 ; 100 += 50
 		for ( let y = (this.maxRowNumberSize ) * this.blockSize; y < this.width; y += this.blockSize ) { //100 ; 100 < 250 ; 100 += 50
@@ -159,8 +155,50 @@ function Nonogram(levelGrid) {
 		}
 	}
 
+	this.currentChoice = {
+		cell: []
+	};
+	this.previousChoice = {
+		active: false,
+		cell: []
+	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	this.fillCellChoice = "default"; //Auto 8a xrhsimepsei gia ta tools
-	
+
+	// implemantaion for redo
+	this.cellChoices = {
+		pastCells: [],
+		newCells : [],
+		index    : 0,
+		update   : function() {
+			if(this.index < this.pastCells.length) {
+				let limit = this.pastCells.length;
+				for(let i=this.index; i<limit; i++) {
+					this.pastCells.pop();
+					this.newCells.pop();
+				}
+				this.index = this.pastCells.length;
+			}
+		}
+	};
 
 
 	//--------------------------------------------------------------------------------------------------------	
