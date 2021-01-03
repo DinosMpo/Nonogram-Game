@@ -47,6 +47,35 @@ Nonogram.prototype.drawColumnNumbers = function() {
 	}
 }
 
+Nonogram.prototype.strokeCurrentChoice = function(cell) {
+	//for the current and previous choice
+	if(this.previousChoice.active) {
+		ctx.beginPath();
+		for(let i=0; i<this.previousChoice.cell.length; i++) {
+			if(this.previousChoice.cell[i].value === 1) {
+				this.drawWhiteCell(this.previousChoice.cell[i]);
+				this.drawBlackCell(this.previousChoice.cell[i]);
+			}else if(this.previousChoice.cell[i].value === 2) {
+				this.drawWhiteCell(this.previousChoice.cell[i]);
+				this.drawXCell(this.previousChoice.cell[i]);
+			}else{
+				ctx.fillStyle = "white";
+				ctx.fillRect(this.previousChoice.cell[i].x + 2, this.previousChoice.cell[i].y + 2, this.previousChoice.cell[i].w - 4, this.previousChoice.cell[i].h - 4);
+			}
+		}
+		ctx.stroke();
+		ctx.closePath();
+		this.previousChoice.cell = []; // gia na kanw clear ton pinaka
+	}
+	this.currentChoice.cell = cell;
+	this.previousChoice.cell.push(cell);
+	this.previousChoice.active = true;
+
+	ctx.strokeStyle = "red";
+	ctx.lineWidth   = 4;
+	ctx.strokeRect(cell.x+5, cell.y+5, this.blockSize-10, this.blockSize-10);
+}
+
 //Draw the cell black
 let drawBlackCellValue = 6;
 Nonogram.prototype.drawBlackCell = function(cell) {
@@ -77,7 +106,6 @@ Nonogram.prototype.drawXCell = function(cell) {
 
 //Gemisma twn keliwn
 Nonogram.prototype.fillCels = function(mouseX, mouseY) {
-	// let chosenCell = NaN;
 	ctx.lineWidth = 3;
 	ctx.beginPath();
 	for(var i=0; i<this.rowNumbersGrid.length; i++) {
@@ -118,13 +146,6 @@ Nonogram.prototype.fillCels = function(mouseX, mouseY) {
 	}
 	ctx.stroke();
 	ctx.closePath();
-	
-	//refactor stadio
-	// for(let i=0;i<this.emptyGrid.length;i++) {
-	// 	if(mouseX >= this.emptyGrid[i].x && mouseY >= this.emptyGrid[i].y && mouseX <= (this.emptyGrid[i].x + this.blockSize) && mouseY <= (this.emptyGrid[i].y + this.blockSize)) {
-	// 		chosenCell = i;
-	// 	}
-	// }
 
 	if(this.fillCellChoice == "default") {
 		for(var i=0;i<this.emptyGrid.length;i++) {
@@ -133,19 +154,19 @@ Nonogram.prototype.fillCels = function(mouseX, mouseY) {
 					this.emptyGrid[i].value = 1;
 					this.drawWhiteCell(this.emptyGrid[i]);
 					this.drawBlackCell(this.emptyGrid[i]);
-					// this.drawPreview(this.emptyGrid[i]);
-					// this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.drawPreview(this.emptyGrid[i]);
 		    	}else if(this.emptyGrid[i].value == 1) { //fill the cell with a X
 			    	this.emptyGrid[i].value = 2;
 			    	this.drawWhiteCell(this.emptyGrid[i]);
 					this.drawXCell(this.emptyGrid[i]);
-					// this.drawPreview(this.emptyGrid[i]);
-					// this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.drawPreview(this.emptyGrid[i]);
 				}else { //Clear the cell
 					this.emptyGrid[i].value = 0;
 					this.drawWhiteCell(this.emptyGrid[i]);
-					// this.drawPreview(this.emptyGrid[i]);
-					// this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.drawPreview(this.emptyGrid[i]);
 				}
 			}
 		}
@@ -156,13 +177,13 @@ Nonogram.prototype.fillCels = function(mouseX, mouseY) {
 					this.emptyGrid[i].value = 1;//fil the cell black
 					this.drawWhiteCell(this.emptyGrid[i]);
 					this.drawBlackCell(this.emptyGrid[i]);
-					// this.drawPreview(this.emptyGrid[i]);
-					// this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.drawPreview(this.emptyGrid[i]);
 			    }else{
 					this.emptyGrid[i].value = 0;
 					this.drawWhiteCell(this.emptyGrid[i]);
-					// this.drawPreview(this.emptyGrid[i]);
-					// this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.drawPreview(this.emptyGrid[i]);
 				}
 			}
 		}
@@ -172,14 +193,14 @@ Nonogram.prototype.fillCels = function(mouseX, mouseY) {
 				if(this.emptyGrid[i].value !== 2) {
 					this.emptyGrid[i].value = 2;
 					this.drawWhiteCell(this.emptyGrid[i]);
-					// this.drawPreview(this.emptyGrid[i]);
 					this.drawXCell(this.emptyGrid[i]);
-					// this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.drawPreview(this.emptyGrid[i]);
+					this.strokeCurrentChoice(this.emptyGrid[i]);
 		    	}else{
 		    		this.emptyGrid[i].value = 0;
 					this.drawWhiteCell(this.emptyGrid[i]);
-					// this.drawPreview(this.emptyGrid[i]);
-					// this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.drawPreview(this.emptyGrid[i]);
 		    	}
 		    }
 		}
@@ -189,10 +210,44 @@ Nonogram.prototype.fillCels = function(mouseX, mouseY) {
 				if(this.emptyGrid[i].value !== 0) {
 					this.emptyGrid[i].value = 0;
 					this.drawWhiteCell(this.emptyGrid[i]);
-					// this.drawPreview(this.emptyGrid[i]);;
-					// this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.strokeCurrentChoice(this.emptyGrid[i]);
+					this.drawPreview(this.emptyGrid[i]);;
 			    }
 			}
 		}
+	}
+}
+
+Nonogram.prototype.drawPreview = function(cell) {
+	let x = 0; //Οι συντεταγμένες του κελιού x και y
+	let y = 0;
+	let widthPreview = this.maxRowNumberSize * this.blockSize; //Πολλαπλασιαζουμε το πλήθος των κελιών που έιναι στα κελιά ανα γραμμή και ανα στήλη με το μέγεθος των κελιών.
+	let heightPreview = this.maxColumnNumberSize * this.blockSize; //για να βρούμε το μεγεθος από αριστερα και απο δεξιά
+	let size; //Το μέγεθος του drawPreview. Συγκρίνουμε το widthPreview με το heightPreview και παίρνουμε το μικρότερο ή το ίσο.
+
+	if(widthPreview == heightPreview) {
+		size = widthPreview-2; //Me thn afairesh dhmiourgoume ena keno apo deksia gia na mhn einai kolhmeno deksias
+		x = (Math.floor(((cell.x) - size) / this.blockSize) * Math.floor(size / this.levelGrid[0].length));
+		y = (Math.floor(((cell.y) - size) / this.blockSize) * Math.floor(size / this.levelGrid.length));
+	}else if(widthPreview > heightPreview){
+		size = heightPreview;
+		x = Math.floor(((cell.x) - widthPreview) / this.blockSize) * Math.floor(size / this.levelGrid[0].length) + ((widthPreview/2)-(size/2));
+		y = Math.floor(((cell.y) - size) / this.blockSize) * Math.floor(size / this.levelGrid.length) + ((heightPreview/2)-(size/2));
+	}else{
+		size = widthPreview-8;
+		x = Math.floor(((cell.x) - size) / this.blockSize) * Math.floor(size / this.levelGrid[0].length) + ((widthPreview/2)-(size/2));
+		y = Math.floor(((cell.y) - heightPreview) / this.blockSize) * Math.floor(size / this.levelGrid.length) + ((heightPreview/2)-(size/2));
+	}
+	let widthCell = Math.floor(size / this.levelGrid[0].length); //328/5
+	let heightCell = Math.floor(size / this.levelGrid.length); //328/5
+
+	if(cell.value === 1) {
+		ctx.fillStyle = "black";
+		ctx.fillRect(x + Math.floor((size-(widthCell*this.levelGrid[0].length))/2), y + Math.floor((size-(heightCell*this.levelGrid.length))/2), widthCell, heightCell);
+		// ctx.fillRect(x + widthCell, y + heightCell, widthCell, heightCell);
+	}else{
+		ctx.fillStyle = "white";
+		ctx.fillRect(x + Math.floor((size-(widthCell*this.levelGrid[0].length))/2), y + Math.floor((size-(heightCell*this.levelGrid.length))/2), widthCell, heightCell);
+		// ctx.fillRect(x + widthCell, y + heightCell, widthCell, heightCell);
 	}
 }
