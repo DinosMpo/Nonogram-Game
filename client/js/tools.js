@@ -218,151 +218,8 @@ $(".clear").click(function() {
 // 	nonogram.cellChoices.update();
 });
 
-//For the help tool
-// $(".help").click(function() {
-// 	for(let i=0; i<nonogram.levelGrid.length; i++) {
-// 		for(let y=0; y<nonogram.levelGrid[i].length; y++) {
-// 			if(nonogram.levelGrid[i][y] === 1 && nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].value === 2) { //ama exei balei x se shmeio pou 8a eprepe na uparxei mauro keli 
-// 				nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].value = 1;
-// 				nonogram.findUserChoices();
-// 				store(currentStage, nonogram.userChoices);
-// 				ctx.strokeStyle = "green";
-// 				ctx.lineWidth   = 4;
-// 				ctx.strokeRect(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x+5, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-// 				ctx.strokeStyle = "black";
-// 				setTimeout( function() {
-// 						ctx.fillStyle = "white";
-// 						ctx.fillRect(	nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + 2, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + 2, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].w - 3, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].h - 3);
-// 						ctx.lineWidth   = 4;
-// 						ctx.strokeStyle = "green";
-// 						ctx.strokeRect(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x+5, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-
-// 				}, 400);
-
-// 				setTimeout( function() {
-// 					ctx.fillStyle = "black";
-// 					ctx.fillRect(	nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + 2, 
-// 									nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + 2, 
-// 									nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].w - 3, 
-// 									nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].h - 3);
-// 					ctx.lineWidth   = 4;
-// 					ctx.strokeStyle = "green";
-// 					ctx.strokeRect(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x+5, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-// 					ctx.strokeStyle = "black";
-// 				}, 1400 );
-
-// 				setTimeout( function() {
-// 						ctx.fillStyle = "white";
-// 						ctx.fillRect(	nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + 2, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + 2, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].w - 3, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].h - 3);
-// 						ctx.lineWidth   = 4;
-// 						ctx.strokeStyle = "green";
-// 						ctx.strokeRect(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x+5, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-// 						ctx.strokeStyle = "black";
-// 				}, 2400);
-
-// 				setTimeout( function() {
-// 					ctx.fillStyle = "black";
-// 					ctx.fillRect(	nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + 2, 
-// 									nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + 2, 
-// 									nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].w - 3, 
-// 									nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].h - 3);
-// 					// ctx.lineWidth   = 4;
-// 					// ctx.strokeStyle = "green";
-// 					// ctx.strokeRect(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x+5, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-// 					// ctx.strokeStyle = "black";
-// 				}, 3400 );
-
-// 				nonogram.drawPreview(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y]);
-// 				ctx.strokeStyle = "black";
-// 				return;
-// 			}else if(nonogram.levelGrid[i][y] === 0 && nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].value === 1) {
-// 				nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].value = 2;
-// 				nonogram.findUserChoices();
-// 				store(currentStage, nonogram.userChoices);
-// 				ctx.strokeStyle = "green";
-// 				ctx.lineWidth   = 4;
-// 				ctx.strokeRect(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x+5, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-// 				ctx.strokeStyle = "black";
-// 				setTimeout( function() {
-// 						ctx.fillStyle = "white";
-// 						ctx.fillRect(	nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + 2, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + 2, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].w - 3, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].h - 3);
-// 						ctx.lineWidth   = 4;
-// 						ctx.strokeStyle = "green";
-// 						ctx.strokeRect(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x+5, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-// 						ctx.strokeStyle = "black";
-// 				}, 400);
-
-// 				setTimeout( function() {
-// 					ctx.strokeStyle = "black";
-// 					ctx.beginPath();
-// 					ctx.moveTo(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + 4, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + 4);
-// 					ctx.lineTo(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + nonogram.blockSize - 4, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + nonogram.blockSize - 4);
-// 					ctx.moveTo(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + nonogram.blockSize - 4, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + 4);
-// 					ctx.lineTo(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + 4, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + nonogram.blockSize - 4);
-// 					ctx.stroke();
-// 					ctx.closePath();
-// 					ctx.lineWidth   = 4;
-// 					ctx.strokeStyle = "green";
-// 					ctx.strokeRect(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x+5, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-// 					ctx.strokeStyle = "black";
-// 				}, 1400 );
-
-// 				setTimeout( function() {
-// 						ctx.fillStyle = "white";
-// 						ctx.fillRect(	nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + 2, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + 2, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].w - 3, 
-// 										nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].h - 3);
-// 						ctx.lineWidth   = 4;
-// 						ctx.strokeStyle = "green";
-// 						ctx.strokeRect(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x+5, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-// 						ctx.strokeStyle = "black";
-// 				}, 2400);
-
-// 				setTimeout( function() {
-// 					ctx.fillStyle = "white";
-// 					ctx.fillRect(	nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + 2, 
-// 									nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + 2, 
-// 									nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].w - 3, 
-// 									nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].h - 3);
-// 					ctx.strokeStyle = "black";
-// 					ctx.beginPath();
-// 					ctx.moveTo(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + 4, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + 4);
-// 					ctx.lineTo(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + nonogram.blockSize - 4, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + nonogram.blockSize - 4);
-// 					ctx.moveTo(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + nonogram.blockSize - 4, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + 4);
-// 					ctx.lineTo(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x + 4, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y + nonogram.blockSize - 4);
-// 					ctx.stroke();
-// 					ctx.closePath();
-// 					// ctx.lineWidth   = 4;
-// 					// ctx.strokeStyle = "green";
-// 					// ctx.strokeRect(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].x+5, nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-// 					// ctx.strokeStyle = "black";
-// 				}, 3400 );
-// 				nonogram.drawPreview(nonogram.emptyGrid[(i*nonogram.levelGrid[0].length)+y]);
-
-// 				ctx.strokeStyle = "black";
-
-// 				return;
-// 			}
-// 		}
-// 	}
-// });
-
 $(".help").click(function() {
-	let helpChoices = {
-		wrong: [],
-		correct: [],
-		index: []
-	};
+	let helpChoices = {	wrong: [], correct: [],	index: []};
 	//οι 2 for einai gia na brw tis la8os epiloges
 	for(let i=0; i<nonogram.levelGrid.length; i++) {
 		for(let y=0; y<nonogram.levelGrid[i].length; y++) {
@@ -381,12 +238,8 @@ $(".help").click(function() {
 			}
 		}
 	}
-	console.log(helpChoices);
 	//sthn sunexeia prepei na parw ena tuxaio la8os
 	let randomChoice = Math.floor(Math.random() * helpChoices.index.length);
-	console.log(randomChoice);
-
-	//----- Refactor to setTimeout h entelws allagh
 	// kai na to dior8wsw analogws sthn pista
 	if(helpChoices.correct[randomChoice] === 0 && helpChoices.wrong[randomChoice].value === 1) { //ama exei balei mauro se keli pou prepei na einai aspro
 		nonogram.emptyGrid[helpChoices.index[randomChoice]].value = 2;
@@ -395,34 +248,16 @@ $(".help").click(function() {
 		ctx.strokeStyle = "green";
 		ctx.lineWidth   = 4;
 		ctx.strokeRect(nonogram.emptyGrid[helpChoices.index[randomChoice]].x+5, nonogram.emptyGrid[helpChoices.index[randomChoice]].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-		// ctx.strokeStyle = "black";
 		setTimeout( function() {
 				nonogram.drawWhiteCell(nonogram.emptyGrid[helpChoices.index[randomChoice]]);
-				ctx.lineWidth   = 4;
 				ctx.strokeStyle = "green";
 				ctx.strokeRect(nonogram.emptyGrid[helpChoices.index[randomChoice]].x+5, nonogram.emptyGrid[helpChoices.index[randomChoice]].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
 		}, 500);
-
 		setTimeout( function() {
 			nonogram.drawXCell(nonogram.emptyGrid[helpChoices.index[randomChoice]]);
-			ctx.lineWidth   = 4;
 			ctx.strokeStyle = "green";
 			ctx.strokeRect(nonogram.emptyGrid[helpChoices.index[randomChoice]].x+5, nonogram.emptyGrid[helpChoices.index[randomChoice]].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
 		}, 1000 );
-
-		// setTimeout( function() {
-		// 		nonogram.drawWhiteCell(nonogram.emptyGrid[helpChoices.index[randomChoice]]);
-		// 		ctx.lineWidth   = 4;
-		// 		ctx.strokeStyle = "green";
-		// 		ctx.strokeRect(nonogram.emptyGrid[helpChoices.index[randomChoice]].x+5, nonogram.emptyGrid[helpChoices.index[randomChoice]].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-		// }, 1500);
-
-		// setTimeout( function() {
-		// 	nonogram.drawWhiteCell(nonogram.emptyGrid[helpChoices.index[randomChoice]]);
-		// 	nonogram.drawXCell(nonogram.emptyGrid[helpChoices.index[randomChoice]]);
-		// 	ctx.strokeStyle = "green";
-		// 	ctx.strokeRect(nonogram.emptyGrid[helpChoices.index[randomChoice]].x+5, nonogram.emptyGrid[helpChoices.index[randomChoice]].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-		// }, 2000 );
 		nonogram.drawPreview(nonogram.emptyGrid[helpChoices.index[randomChoice]]);
 		ctx.strokeStyle = "black";
 	}else if(helpChoices.correct[randomChoice] === 1 && helpChoices.wrong[randomChoice].value === 2) { //ama exei balei x se shmeio pou 8a eprepe na einai mauro
@@ -430,62 +265,50 @@ $(".help").click(function() {
 		// nonogram.findUserChoices();
 		// store(currentStage, nonogram.userChoices);
 		ctx.strokeStyle = "green";
-		ctx.lineWidth   = 4;
 		ctx.strokeRect(nonogram.emptyGrid[helpChoices.index[randomChoice]].x+5, nonogram.emptyGrid[helpChoices.index[randomChoice]].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-		// ctx.strokeStyle = "black";
 		setTimeout( function() {
 				nonogram.drawWhiteCell(nonogram.emptyGrid[helpChoices.index[randomChoice]]);
-				// ctx.fillStyle = "white";
-				// ctx.fillRect(	nonogram.emptyGrid[helpChoices.index[randomChoice]].x + 2, 
-				// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].y + 2, 
-				// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].w - 3, 
-				// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].h - 3);
-				ctx.lineWidth   = 4;
-				// ctx.strokeStyle = "green";
+				ctx.strokeStyle = "green";
 				ctx.strokeRect(nonogram.emptyGrid[helpChoices.index[randomChoice]].x+5, nonogram.emptyGrid[helpChoices.index[randomChoice]].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-		}, 400);
-
+		}, 500);
 		setTimeout( function() {
 			nonogram.drawBlackCell(nonogram.emptyGrid[helpChoices.index[randomChoice]]);
-			// ctx.fillStyle = "black";
-			// ctx.fillRect(	nonogram.emptyGrid[helpChoices.index[randomChoice]].x + 2, 
-			// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].y + 2, 
-			// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].w - 3, 
-			// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].h - 3);
-			ctx.lineWidth   = 4;
-			// ctx.strokeStyle = "green";
+			ctx.strokeStyle = "green";
 			ctx.strokeRect(nonogram.emptyGrid[helpChoices.index[randomChoice]].x+5, nonogram.emptyGrid[helpChoices.index[randomChoice]].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-			// ctx.strokeStyle = "black";
-		}, 1400 );
-
-		// setTimeout( function() {
-		// 	nonogram.drawWhiteCell(nonogram.emptyGrid[helpChoices.index[randomChoice]]);	
-		// 	// ctx.fillStyle = "white";
-		// 	// ctx.fillRect(	nonogram.emptyGrid[helpChoices.index[randomChoice]].x + 2, 
-		// 	// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].y + 2, 
-		// 	// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].w - 3, 
-		// 	// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].h - 3);
-		// 	ctx.lineWidth   = 4;
-		// 	// ctx.strokeStyle = "green";
-		// 	ctx.strokeRect(nonogram.emptyGrid[helpChoices.index[randomChoice]].x+5, nonogram.emptyGrid[helpChoices.index[randomChoice]].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-		// 	// ctx.strokeStyle = "black";
-		// }, 2400);
-
-		// setTimeout( function() {
-		// 	nonogram.drawBlackCell(nonogram.emptyGrid[helpChoices.index[randomChoice]]);
-		// 	// ctx.fillStyle = "black";
-		// 	// ctx.fillRect(	nonogram.emptyGrid[helpChoices.index[randomChoice]].x + 2, 
-		// 	// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].y + 2, 
-		// 	// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].w - 3, 
-		// 	// 				nonogram.emptyGrid[helpChoices.index[randomChoice]].h - 3);
-		// 	ctx.lineWidth   = 4;
-		// 	ctx.strokeStyle = "green";
-		// 	ctx.strokeRect(nonogram.emptyGrid[helpChoices.index[randomChoice]].x+5, nonogram.emptyGrid[helpChoices.index[randomChoice]].y+5, nonogram.blockSize-10, nonogram.blockSize-10);
-		// 	ctx.strokeStyle = "black";
-		// }, 3400 );
-
+		}, 1000 );
 		nonogram.drawPreview(nonogram.emptyGrid[helpChoices.index[randomChoice]]);
 		ctx.strokeStyle = "black";
-		return;
+	}
+});
+
+//Home button
+$(".home").click(function(){
+	if(state == "multiplayer") {
+		if(turn === false) {
+			$("#waiting-screen").hide();
+		}
+		sock.emit('exit-multiplayer', multiplayerGame);
+		currentLevel = "none"; //?
+		turn = false;
+		wait = false;
+	}
+
+	$("#container-tools").hide();
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	container.style.transform = "none";
+	container.style.left = "0%";
+	container.style.top = "0%";
+	canvas.width = innerWidth;
+	canvas.height = innerHeight;
+	canvas.style.border = "none";
+	state = "menu";
+	$("#menu").show();
+	$("#clients-count").show();
+	//If drag controls was active then disable them
+	if($('#top').show()) {
+		$('#top').hide();
+		$('#bottom').hide();
+		$('#left').hide();
+		$('#right').hide();
 	}
 });
